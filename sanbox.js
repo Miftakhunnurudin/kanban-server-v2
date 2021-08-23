@@ -1,19 +1,8 @@
-class Movie {
-    static async print() {
-        return new Promise((resolve, reject) => {
-            setTimeout(()=>{
-                console.log("Movie")
-                console.log("Movie2")    
-                resolve()
-            },1000)
-        })
-        
-    }
-}
+const KanbanController = require('./controllers/KanbanController')
+const {connect} = require('./config/mongodb')
 
-async function app () {
-    await Movie.print()
-    console.log("Movie3")
-}
-
-app()
+connect().then(()=>{
+    KanbanController.getAll()
+        .then((data)=>{console.log(data)})
+        .catch(console.error)
+  })
