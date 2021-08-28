@@ -47,10 +47,11 @@ class KanbanController {
 
     static async createTask(data){
         const promise = async (resolve) => {
-            const {id,task:newTask,columnId} = data
+            const {id,newTask,columnId} = data
             const isKanbanExist = await Kanban.findOne(id)
             if (isKanbanExist) {
                 const { task,column } = isKanbanExist
+                // console.log(isKanbanExist)
                 newTask.id = uuidv4().toString()
                 task[newTask.id] = newTask
                 const newColumn = []
@@ -61,7 +62,7 @@ class KanbanController {
                     newColumn.push(col);
                 })
                 const response = await Kanban.update(id, {task, column:newColumn} )
-                if (response.result.ok) resolve(task)
+                if (response) resolve(task)
             } else resolve(null)
         }
         return new Promise(promise)

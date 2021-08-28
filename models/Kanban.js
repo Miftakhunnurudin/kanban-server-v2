@@ -15,7 +15,7 @@ class Kanban {
         return this.db().insertOne(data)
     }
     static update(id,data) {
-        return this.db().updateOne({_id:ObjectId(id)}, {$set:data}, {new:true})
+        return this.db().updateOne({_id:ObjectId(id)}, {$set:data}/*, {new:true}*/)
     }
     static deleteOne(id) {
         return this.db().deleteOne({_id:ObjectId(id)})
